@@ -178,9 +178,9 @@ module Kitchen
         platform = case config[:platform]
         when 'debian', 'ubuntu'
           disable_upstart = <<-eos
+            ENV container docker
             RUN dpkg-divert --local --rename --add /sbin/initctl
             RUN ln -sf /bin/true /sbin/initctl
-            ENV container docker
           eos
           packages = <<-eos
             ENV DEBIAN_FRONTEND noninteractive
